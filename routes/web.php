@@ -15,7 +15,9 @@ Route::get('/tasks', function (){
     ]);
 })->name('tasks.index');
 
-Route::get('/tasks{id}',function($id){    
+Route::view('tasks/create','create')->name('tasks.create');
+
+Route::get('/tasks/{id}',function($id){    
     return view('show',['task'=>\App\Models\Task::findOrFail($id)]);
 })->name('tasks.show');
 
@@ -25,8 +27,11 @@ Route::get('/hello',function(){
     return "Hello page ma aako ho?";
 });
 
-// Route::get('/')
 
 Route::fallback(function(){
     return 'Jpt page ma kina aako?';
 });
+
+Route::post('tasks',function(){
+    dd("You have store a task successfully");
+})->name('tasks.store');
