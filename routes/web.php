@@ -4,11 +4,23 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Models\Task;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\SingleActionController;
+use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\RegistrationController;
 
 
-Route::get('/',function(){
-    return redirect()->route('tasks.index');
-});
+// Basic Controller
+Route::get('/',[UserController::class,'register']);
+
+// Single Action Controller
+Route::get('/single',SingleActionController::class);
+
+//Resource Controller
+Route::resource('photo',ResourceController::class);
+
+Route::get('/register',[RegistrationController::class ,'index']);
+Route::post('/register',[RegistrationController::class ,'register']);
 
 Route::get('/tasks', function (){
     return view('index',
@@ -19,13 +31,16 @@ Route::get('/tasks', function (){
 
 Route::view('tasks/create','create')->name('tasks.create');
 
-Route::get('/tasks/{id}',function($id){    
-    return view('show',['task'=>Task::findOrFail($id)]);
+
+Route::get('/tasks/{task}/edit',function(Task $task){    
+    return view('edit',['task'=>$task]);
+})->name('tasks.edit');
+
+
+Route::get('/tasks/{task}',function(Task $task){    
+    return view('show',['task'=>$task]);
 })->name('tasks.show');
 
-Route::get('/tasks/{id}/edit',function($id){    
-    return view('edit',['task'=>Task::findOrFail($id)]);
-})->name('tasks.edit');
 
 
 Route::get('/hello',function(){
@@ -38,9 +53,9 @@ Route::fallback(function(){
     return 'Jpt page ma kina aako?';
 });
 
-Route::post('tasks',function(Request $request){
+Route::post('/tasks',function(Request $request){
     $data=$request->validate([
-        'title'=>'required|max:255',
+        'title'=>'required|max:255', 
         'description'=>'required',
         'long_description'=>'required'
     ]);
@@ -55,3 +70,20 @@ Route::post('tasks',function(Request $request){
     return redirect()->route('tasks.show',['id'=>$task->id])
     ->with('success','Task created successfully');
 })->name('tasks.store');
+
+Route::put('/tasks/{task}',function(Task $task,Request $request){
+    $data=$request->validate([
+        'title'=>'required|max:255',
+        'description'=>'required',
+        'long_description'=>'required'
+    ]);
+ 
+    $task->title=$data['title'];
+    $task->description=$data['description'];
+    $task->long_description=$data['long_description'];
+    $task->save();
+
+    // One time message using flash by creating session  variable success(with->)
+    return redirect()->route('tasks.show',['id'=>$task->id])
+    ->with('success','Task updated successfully');
+})->name('tasks.update');
