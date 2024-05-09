@@ -8,7 +8,7 @@ use App\Models\Customers;
 class CustomerController extends Controller
 {
     
-    public function index(){
+    public function create(){
         return view('customerDetails');
     }
     public function store(Request $request)
@@ -26,5 +26,14 @@ class CustomerController extends Controller
         $customers->password=md5($request['password']);
         $customers->status=$request['status'];
         $customers->save();
+
+        return redirect('/customer/view');
+    }
+
+    public function view()
+    {
+        $customers=Customers::all();
+        $data=compact('customers');
+        return view('customer-view')->with($data);
     }
 }

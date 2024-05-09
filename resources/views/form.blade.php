@@ -4,7 +4,7 @@
 
 @section('content')
     {{-- url('/''),it gets the base url so the action of this form goes to baseurl/register with method of post --}}
-    <form action="{{url('/')}}/register" method="POST"> 
+    <form action="{{url('/register')}}" method="POST"> 
         @csrf
         @php    
             $demo=1;

@@ -13,6 +13,7 @@ class RegistrationController extends Controller
 
     public function register(Request $req){
         
+        print_r($req->all());
         $req->validate([
             'name'=>'required',
             'email'=>'required|email',
@@ -21,8 +22,7 @@ class RegistrationController extends Controller
 
         ]);
         echo "<pre>";
-        print_r($req->all());
         // echo "aaya yl";
-        // return view('form');
+        return view('form');
     }
 }

@@ -19,12 +19,16 @@ use App\Http\Controllers\CustomerController;
 //     print_r($customers->toArray());
 // });
 
-Route::get('/customer',[CustomerController::class,'index']);
+Route::get('/customer/create',[CustomerController::class,'create'])->name('customer.create');
 Route::post('/customer',[CustomerController::class,'store']);
+Route::get('/customer/view',[CustomerController::class,'view']);
 
+Route::get('/',function(){
+    return view('indexx');
+});
 
 // Basic Controller
-Route::get('/',[UserController::class,'register']);
+// Route::get('/',[UserController::class,'register']);
 
 // Single Action Controller
 Route::get('/single',SingleActionController::class);
