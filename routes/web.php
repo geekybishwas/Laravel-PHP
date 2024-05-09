@@ -8,6 +8,19 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SingleActionController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\RegistrationController;
+use App\Models\Customers;
+use App\Http\Controllers\CustomerController;
+
+// To get the details of customer table by using models and show them into array
+
+// Route::get('/customer',function(){
+//     $customers=Customers::all();
+//     echo "<pre>";
+//     print_r($customers->toArray());
+// });
+
+Route::get('/customer',[CustomerController::class,'index']);
+Route::post('/customer',[CustomerController::class,'store']);
 
 
 // Basic Controller
@@ -20,6 +33,7 @@ Route::get('/single',SingleActionController::class);
 Route::resource('photo',ResourceController::class);
 
 Route::get('/register',[RegistrationController::class ,'index']);
+
 Route::post('/register',[RegistrationController::class ,'register']);
 
 Route::get('/tasks', function (){
