@@ -9,7 +9,10 @@ class CustomerController extends Controller
 {
     
     public function create(){
-        return view('customerDetails');
+        $url=url('/customer');
+        $title='Customer Registration';
+        $data=compact('url','title');
+        return view('customerDetails')->with($data);
     }
     public function store(Request $request)
     {
@@ -35,5 +38,51 @@ class CustomerController extends Controller
         $customers=Customers::all();
         $data=compact('customers');
         return view('customer-view')->with($data);
+    }
+
+    public function delete($id)
+    {
+        // It finds the customer by their id and delete the record
+        // Customers::find($id)->delete();
+        $customers=Customers::find($id);
+        if(!is_null($customers))
+        {
+            $customers->delete();
+        }
+        return redirect('customer/view');
+        // It return the redirect back to where it came from
+        // return redirect()->back();
+
+    }
+
+    public function edit($id)
+    {
+        $customers=Customers::find($id);
+        if(is_null($customers))
+        {
+            // if user not found
+            return redirect('customer/view');
+        }
+        else{
+            $url=url('/customer/update') .'/' . $id;
+            $title='Update Customers';
+            $data=compact('customers','url','title');
+            return view('customerDetails')->with($data);
+        }
+        
+    }
+    public function update($id,Request $request)
+    {
+        $customers=Customers::find($id);
+        $customers->name=$request['name'];
+        $customers->email=$request['email'];
+        $customers->address=$request['address'];
+        $customers->dob=$request['dob'];
+        $customers->city=$request['city'];
+        $customers->password=md5($request['password']);
+        $customers->status=$request['status'];
+        $customers->save();
+
+        return redirect('/customer/view');
     }
 }

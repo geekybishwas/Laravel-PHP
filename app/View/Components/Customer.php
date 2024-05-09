@@ -11,11 +11,13 @@ class Customer extends Component
     public $label;
     public $name;
     public $type;
-    public function __construct($label,$name,$type)
+    public $value;
+    public function __construct($label,$name,$type,$value)
     {
         $this->label=$label;
         $this->name=$name;
         $this->type=$type;
+        $this->value=$value;
 
     }
 
