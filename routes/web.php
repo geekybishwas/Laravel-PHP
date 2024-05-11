@@ -75,24 +75,24 @@ Route::post('/register',[RegistrationController::class ,'register']);
 
 
 
-Route::get('/tasks', function (){
-    return view('index',
-    [
-        'tasks'=>Task::latest()->get()
-    ]);
-})->name('tasks.index');
+// Route::get('/tasks', function (){
+//     return view('index',
+//     [
+//         'tasks'=>Task::latest()->get()
+//     ]);
+// })->name('tasks.index');
 
-Route::view('tasks/create','create')->name('tasks.create');
-
-
-Route::get('/tasks/{task}/edit',function(Task $task){    
-    return view('edit',['task'=>$task]);
-})->name('tasks.edit');
+// Route::view('tasks/create','create')->name('tasks.create');
 
 
-Route::get('/tasks/{task}',function(Task $task){    
-    return view('show',['task'=>$task]);
-})->name('tasks.show');
+// Route::get('/tasks/{task}/edit',function(Task $task){    
+//     return view('edit',['task'=>$task]);
+// })->name('tasks.edit');
+
+
+// Route::get('/tasks/{task}',function(Task $task){    
+//     return view('show',['task'=>$task]);
+// })->name('tasks.show');
 
 
 
