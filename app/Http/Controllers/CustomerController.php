@@ -16,9 +16,8 @@ class CustomerController extends Controller
     }
     public function store(Request $request)
     {
-        echo "<pre>";
-        print_r($request->all());
-        // echo $request['city'];
+        // echo "<pre>";
+        // print_r($request->all());
         // Insert query through models;
         $customers=new Customers;
         $customers->name=$request['name'];
