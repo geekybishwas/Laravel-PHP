@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Customer Trash</title>
 </head>
 <body>
     <a href="{{route('customer.create')}}">
         
         <button>Add</button>
     </a>
-    <a href="{{route('customer.trash')}}">
+    <a href="{{url('/customer/view')}}">
         
-        <button>Go to trash</button>
+        <button>Customer View</button>
     </a>
     <table>
         <thead>
@@ -51,11 +51,11 @@
                 </td>
                 <td>
                     {{-- <a href="{{url('/customer/delete')}}/{{$customer->customer_id}}"> --}}
-                    <a href="{{route('customer.delete',['id'=>$customer->customer_id])}}">
-                        <button>Trash</button>
+                    <a href="{{route('customer.forceDelete',['id'=>$customer->customer_id])}}">
+                        <button>Delete</button>
                     </a>
-                    <a href="{{route('customer.edit',['id'=>$customer->customer_id])}}">
-                        <button>Edit</button>
+                    <a href="{{route('customer.restore',['id'=>$customer->customer_id])}}">
+                        <button>Restore</button>
                     </a>
                 </td>
             </tr>

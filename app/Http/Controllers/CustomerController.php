@@ -54,6 +54,24 @@ class CustomerController extends Controller
 
     }
 
+    public function forceDelete($id)
+    {
+        $customers=Customers::withTrashed()->find($id);
+        if(!is_null($customers)){
+            $customers->forceDelete();
+        }
+        return redirect('customer/trash');
+    }
+
+    public function restore($id)
+    {
+        $customers=Customers::withTrashed()->find($id);
+        if(!is_null($customers)){
+            $customers->restore();
+        }
+        return redirect('customer/trash');
+    }
+
     public function edit($id)
     {
         $customers=Customers::find($id);
@@ -83,5 +101,14 @@ class CustomerController extends Controller
         $customers->save();
 
         return redirect('/customer/view');
+    }
+    public function trash()
+    {
+        $customers=Customers::onlyTrashed()->get();
+        // $customers=Customers::withTrashed()->get();
+
+        $data=compact('customers');
+        return view('customerTrash')->with($data);
+
     }
 }

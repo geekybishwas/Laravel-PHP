@@ -40,7 +40,7 @@
             background-color: #555;
         }
     </style>
-</head>
+</head>  
 <body>
 
 <nav>

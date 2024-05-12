@@ -23,8 +23,11 @@ Route::get('/customer/create',[CustomerController::class,'create'])->name('custo
 Route::post('/customer',[CustomerController::class,'store']);
 Route::get('/customer/view',[CustomerController::class,'view']);
 Route::get('/customer/delete/{id}',[CustomerController::class,'delete'])->name('customer.delete');
+Route::get('/customer/forceDelete/{id}',[CustomerController::class,'forceDelete'])->name('customer.forceDelete');
+Route::get('/customer/restore/{id}',[CustomerController::class,'restore'])->name('customer.restore');
 Route::get('/customer/edit/{id}',[CustomerController::class,'edit'])->name('customer.edit');
 Route::post('/customer/update/{id}',[CustomerController::class,'update'])->name('customer.update');
+Route::get('/customer/trash',[CustomerController::class,'trash'])->name('customer.trash');
 
 Route::get('/',function(){
     return view('indexx');
@@ -49,10 +52,12 @@ Route::get('get-all-session',function(){
     p($session);
 });
 
-// It set the session data
+// It set the session data 
 Route::get('set-session',function(Request $request){
     $request->session()->put('name',"biswas");
     $request->session()->put('id','123');
+    // It wil appear one at a time and destroy itself
+    $request->session()->flash('status','Suceess');
     return redirect('get-all-session');
 
 });
