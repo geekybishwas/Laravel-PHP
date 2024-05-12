@@ -43,7 +43,25 @@ Route::get('/register',[RegistrationController::class ,'index']);
 
 Route::post('/register',[RegistrationController::class ,'register']);
 
+// It prints all the session data stored
+Route::get('get-all-session',function(){
+    $session=session()->all();
+    p($session);
+});
 
+// It set the session data
+Route::get('set-session',function(Request $request){
+    $request->session()->put('name',"biswas");
+    $request->session()->put('id','123');
+    return redirect('get-all-session');
+
+});
+
+// It destroy the session data
+Route::get('destroy-session',function(){
+    session()->forget(['name','id']);
+    return redirect('get-all-session');
+});
 
 
 

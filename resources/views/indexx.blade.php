@@ -45,6 +45,13 @@
 
 <nav>
     <ul>
+        <li><a href="{{url('/')}}">
+            @if(session()->has('name'))
+                {{session()->get('name')}}  
+            @else
+                Guest
+            @endif
+        </a></li>
         <li><a href="{{url('/')}}">Home</a></li>
         <li><a href="{{url('/')}}/register">Register</a></li>
         <li><a href="{{url('/')}}/customer/view">Customer</a></li>
