@@ -32,10 +32,19 @@ class CustomerController extends Controller
         return redirect('/customer/view');
     }
 
-    public function view()
+    public function view(Request $request)
     {
-        $customers=Customers::all();
-        $data=compact('customers');
+        $search=$request['search'] ?? "";
+        if($search!="")
+        {
+            $customers=Customers::where('name','LIKE',"$search%")->orWhere('email','LIKE',"$search%")->get();
+            // echo $search;
+            // die;
+        }
+        else{
+            $customers=Customers::all();
+        }
+        $data=compact('customers','search');
         return view('customer-view')->with($data);
     }
 

@@ -7,6 +7,13 @@
     <title>Document</title>
 </head>
 <body>
+    <form action="" method="GET">
+        <input type="text" name="search" placeholder='Search by name n email' value={{$search}}>
+        <button>Search</button>
+        <a href="{{url('/customer/view')}}">
+            <button type='button'>Reset</button>
+        </a>
+    </form>
     <a href="{{route('customer.create')}}">
         
         <button>Add</button>
