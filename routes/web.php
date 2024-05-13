@@ -21,15 +21,21 @@ use App\Http\Controllers\UploadController;
 //     print_r($customers->toArray());
 // });
 
-Route::get('/customer/create',[CustomerController::class,'create'])->name('customer.create');
-Route::post('/customer',[CustomerController::class,'store']);
-Route::get('/customer/view',[CustomerController::class,'view']);
-Route::get('/customer/delete/{id}',[CustomerController::class,'delete'])->name('customer.delete');
-Route::get('/customer/forceDelete/{id}',[CustomerController::class,'forceDelete'])->name('customer.forceDelete');
-Route::get('/customer/restore/{id}',[CustomerController::class,'restore'])->name('customer.restore');
-Route::get('/customer/edit/{id}',[CustomerController::class,'edit'])->name('customer.edit');
-Route::post('/customer/update/{id}',[CustomerController::class,'update'])->name('customer.update');
-Route::get('/customer/trash',[CustomerController::class,'trash'])->name('customer.trash');
+// Route Grouping
+
+Route::group(['prefix'=>'/customer'],function(){
+    Route::get('/create',[CustomerController::class,'create'])->name('customer.create');
+    Route::post('/',[CustomerController::class,'store']);
+    Route::get('/view',[CustomerController::class,'view']);
+    Route::get('/delete/{id}',[CustomerController::class,'delete'])->name('customer.delete');
+    Route::get('/forceDelete/{id}',[CustomerController::class,'forceDelete'])->name('customer.forceDelete');
+    Route::get('/restore/{id}',[CustomerController::class,'restore'])->name('customer.restore');
+    Route::get('/edit/{id}',[CustomerController::class,'edit'])->name('customer.edit');
+    Route::post('/update/{id}',[CustomerController::class,'update'])->name('customer.update');
+    Route::get('/trash',[CustomerController::class,'trash'])->name('customer.trash');
+
+});
+
 
 Route::get('/',function(){
     return view('indexx');
