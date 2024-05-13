@@ -10,6 +10,8 @@ use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\RegistrationController;
 use App\Models\Customers;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\UploadController;
+
 
 // To get the details of customer table by using models and show them into array
 
@@ -32,6 +34,13 @@ Route::get('/customer/trash',[CustomerController::class,'trash'])->name('custome
 Route::get('/',function(){
     return view('indexx');
 });
+
+Route::get('/upload',function(){
+    return view('upload');
+});
+
+// Route::put('/uplaod',[ContactController::class,'store'])->name('file.uplaod');
+Route::post('upload', [UploadController::class,'store'])->name('file.upload');
 
 // Basic Controller
 // Route::get('/',[UserController::class,'register']);
