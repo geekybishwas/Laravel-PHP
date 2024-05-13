@@ -60,7 +60,7 @@ class CustomerController extends Controller
         if(!is_null($customers)){
             $customers->forceDelete();
         }
-        return redirect('customer/trash');
+        return redirect()->back();
     }
 
     public function restore($id)
