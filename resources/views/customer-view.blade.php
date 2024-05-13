@@ -68,8 +68,9 @@
             </tr>
             @endforeach
         </tbody>
-
-
     </table>
+    <div>
+        {{$customers->links();}}
+    </div>
 </body>
 </html>
