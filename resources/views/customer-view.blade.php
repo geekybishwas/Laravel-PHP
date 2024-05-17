@@ -16,7 +16,7 @@
     </form>
     <a href="{{route('customer.create')}}">
         
-        <button>Add</button>
+        <button>Add</button> 
     </a>
     <a href="{{route('customer.trash')}}">
         

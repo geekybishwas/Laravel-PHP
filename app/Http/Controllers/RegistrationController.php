@@ -22,7 +22,7 @@ class RegistrationController extends Controller
 
         ]);
         echo "<pre>";
-        // echo "aaya yl";
+        echo "aaya yl";
         return view('form');
     }
 }
