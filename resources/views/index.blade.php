@@ -13,5 +13,8 @@
     @empty
         <div>There is no tasks here</div>
     @endforelse
-
+        
+    @if($tasks->count())
+        {{$tasks->links();}}
+    @endif
 @endsection
