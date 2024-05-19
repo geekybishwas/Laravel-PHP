@@ -48,11 +48,11 @@ class CustomerController extends Controller
         return view('customer-view')->with($data);
     }
 
-    public function delete($id)
+    public function delete(Task $task)
     {
         // It finds the customer by their id and delete the record
         // Customers::find($id)->delete();
-        $customers=Customers::find($id);
+        $customers=Customers::find($task);
         if(!is_null($customers))
         {
             $customers->delete();
@@ -63,43 +63,43 @@ class CustomerController extends Controller
 
     }
 
-    public function forceDelete($id)
+    public function forceDelete(Task $task)
     {
-        $customers=Customers::withTrashed()->find($id);
+        $customers=Customers::withTrashed()->find($task);
         if(!is_null($customers)){
             $customers->forceDelete();
         }
         return redirect()->back();
     }
 
-    public function restore($id)
+    public function restore(Task $task)
     {
-        $customers=Customers::withTrashed()->find($id);
+        $customers=Customers::withTrashed()->find($task);
         if(!is_null($customers)){
             $customers->restore();
         }
         return redirect('customer/trash');
     }
 
-    public function edit($id)
+    public function edit(Task $task)
     {
-        $customers=Customers::find($id);
+        $customers=Customers::find($task);
         if(is_null($customers))
         {
             // if user not found
             return redirect('customer/view');
         }
         else{
-            $url=url('/customer/update') .'/' . $id;
+            $url=url('/customer/update') .'/' . $task;
             $title='Update Customers';
             $data=compact('customers','url','title');
             return view('customerDetails')->with($data);
         }
         
     }
-    public function update($id,Request $request)
+    public function update(Task $task,Request $request)
     {
-        $customers=Customers::find($id);
+        $customers=Customers::find($task);
         $customers->name=$request['name'];
         $customers->email=$request['email'];
         $customers->address=$request['address'];

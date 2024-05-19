@@ -10,6 +10,18 @@ class UploadController extends Controller
         // echo "<pre>";
         // print_r($request->all());
 
+        $data=request()->validate([
+            'caption'=>'required',
+            'image'=>['required','image'],
+        ]);
+
+        $imagePath=request('image')->store('uploads','public');
+
+        $image=Image::make(public_path('storage/{$imagePath}'))->fit(1200,1200);
+
+        $image->save();
+
+
         // It uploads the file in uploads file in storage/app(here laravel generates a filename as they want)
         // echo $request->file('file')->store('uploads');
 
