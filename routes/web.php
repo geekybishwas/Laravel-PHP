@@ -88,7 +88,7 @@ Route::get('destroy-session',function(){
 Route::get('/tasks', function (){
     return view('index',
     [
-        'tasks'=>Task::latest()->paginate(3)
+        'tasks'=>Task::latest()->paginate(5)
     ]);
 })->name('tasks.index');
 

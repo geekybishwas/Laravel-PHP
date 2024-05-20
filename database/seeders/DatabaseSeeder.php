@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Book;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
+use App\Models\Review;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,8 +24,35 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $this->call([
-            CustomerSeeder::class
-        ]);
+        // $this->call([
+        //     CustomerSeeder::class
+        // ]);
+
+        Book::factory(10)->create()->each(function ($book){
+            $numReviews=random_int(5,20);
+
+            Review::factory()->count($numReviews)
+            ->good()
+            ->for($book)
+            ->create();
+        });
+
+        Book::factory(10)->create()->each(function ($book){
+            $numReviews=random_int(5,20);
+
+            Review::factory()->count($numReviews)
+            ->average()
+            ->for($book)
+            ->create();
+        });
+
+        Book::factory(10)->create()->each(function ($book){
+            $numReviews=random_int(5,20);
+
+            Review::factory()->count($numReviews)
+            ->bad()
+            ->for($book)
+            ->create();
+        });
     }
 }
