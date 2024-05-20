@@ -42,7 +42,7 @@ class CustomerController extends Controller
             // die;
         }
         else{
-            $customers=Customers::paginate(15);
+            $customers=Customers::paginate(2);
         }
         $data=compact('customers','search');
         return view('customer-view')->with($data);

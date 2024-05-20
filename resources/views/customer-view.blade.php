@@ -70,7 +70,11 @@
         </tbody>
     </table>
     <div>
-        {{$customers->links();}}
+        <div>
+
+            {{$customers->links()}}
+    
+        </div>
     </div>
 </body>
 </html>
