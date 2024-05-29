@@ -25,4 +25,27 @@ class Customers extends Model
     {
         return date('d-M-Y',strtotime($value));
     } 
+
+    // It enables mass assignment
+    protected $fillable=[
+        'name',
+        'email',
+        'address',
+        'dob',
+        'city',
+        'password',
+        'status'
+    ];
+
+    protected $rules=
+        [
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'address' => 'required|string',
+            'dob' => 'required|date_format:Y-m-d', // Assuming the date format in your form is YYYY-MM-DD
+            'city' => 'required|string',
+            'password' => 'required|string|min:8', // Assuming a minimum length for the password
+            'status' => 'required|numeric', // Assuming 'status' is a numeric field
+        ];
+    
 } 

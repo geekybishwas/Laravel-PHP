@@ -19,15 +19,13 @@ class CustomerController extends Controller
         // echo "<pre>";
         // print_r($request->all());
         // Insert query through models;
-        $customers=new Customers;
-        $customers->name=$request['name'];
-        $customers->email=$request['email'];
-        $customers->address=$request['address'];
-        $customers->dob=$request['dob'];
-        $customers->city=$request['city'];
-        $customers->password=md5($request['password']);
-        $customers->status=$request['status'];
-        $customers->save();
+
+        // $validation=Customers::create();
+
+        $validation['password']=bcrypt($validation['password']);
+        
+
+        Customers::create($validation);
 
         return redirect('/customer/view');
     }
@@ -97,17 +95,16 @@ class CustomerController extends Controller
         }
         
     }
-    public function update($id,Request $request)
-    {
-        $customers=Customers::find($id);
-        $customers->name=$request['name'];
-        $customers->email=$request['email'];
-        $customers->address=$request['address'];
-        $customers->dob=$request['dob'];
-        $customers->city=$request['city'];
-        $customers->password=md5($request['password']);
-        $customers->status=$request['status'];
-        $customers->save();
+        public function update($id,Request $request)
+        {
+        $customers=Customers::findOrFail($id);
+
+        $validation=$request->validate($customers->rules);
+
+        $validation['password']=bcrypt($validation['password']);
+
+
+        $customers->update($validation); 
 
         return redirect('/customer/view');
     }

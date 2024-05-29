@@ -13,7 +13,7 @@
         <x-customer label="DOB" name='dob' type="date"/>
         <x-customer label="City" name='city' type="text"/>
         <x-customer label="Password" name='password' type="password"/>
-        <x-customer label="Status" name='status' type="number"/>
+        {{-- <x-customer label="Status" name='status' type="number"/> --}}
         <button>Submit</button>
     </form>
 @endsection 

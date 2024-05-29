@@ -28,8 +28,8 @@ class UploadController extends Controller
         // Here we generate the file name and upload it to public/upload
         // getClientOriginalExtension catches the extension of the uploaded file
         
-        $fileName = time() . "-geeky." . $request->file('file')->getClientOriginalExtension();
-        $request->file('file')->storeAs('public/uploads',$fileName);
+        // $fileName = time() . "-geeky." . $request->file('file')->getClientOriginalExtension();
+        // $request->file('file')->storeAs('public/uploads',$fileName);
 
         
     }
